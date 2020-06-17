@@ -1,4 +1,5 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT || 3000;
@@ -8,20 +9,35 @@ server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+app.use(express.static('public'));
+
+
+app.get('/rooms', (req, res) => {
+    res.sendFile(__dirname + '/public/rooms.html');
+});
+
+app.get('/chillout_place', (req, res) => {
+    res.sendFile(__dirname + '/public/chillout_place.html');
+});
+
+app.get('/nightlife', (req, res) => {
+    res.sendFile(__dirname + '/public/nightlife.html');
+});
+
+app.get('/series_movies', (req, res) => {
+    res.sendFile(__dirname + '/public/series_movies.html');
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/javascript', (req, res) => {
-    res.sendFile(__dirname + '/public/javascript.html');
+app.get('/user', (req, res) => {
+    res.sendFile(__dirname + '/public/user.html');
 });
 
-app.get('/swift', (req, res) => {
-    res.sendFile(__dirname + '/public/swift.html');
-});
-
-app.get('/css', (req, res) => {
-    res.sendFile(__dirname + '/public/css.html');
+app.get('/nicknameerror', (req, res) => {
+    res.sendFile(__dirname + '/public/nicknameerror.html');
 });
 
 // tech namespace
